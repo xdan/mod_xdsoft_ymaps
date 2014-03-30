@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+/**
+ * @copyright	Copyright (c) 2014 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ */
+-->
+<extension type="module" method="upgrade" client="site">
+	<name>MOD_XDSOFT_YMAPS</name>
+	<creationDate>March 2014</creationDate>
+	<author>Chupurnov Valeriy</author>
+	<authorEmail>chupurnov@gmail.com</authorEmail>
+	<authorUrl>http://xdan.ru</authorUrl>
+	<copyright>(c) xdan.ru</copyright>
+	<license>GNU GPL</license>
+	<version>1.2.9</version>
+	<description>MOD_XDSOFT_YMAPS_DESCRIPTION</description>
+	<copyright>Copyright (c) 2014 xdsoft. All rights reserved.</copyright>
+	<files>
+		<filename module="mod_xdsoft_ymaps">mod_xdsoft_ymaps.php</filename>
+		<filename>mod_xdsoft_ymaps.xml</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+		<folder>language</folder>
+		<folder>fields</folder>
+		<folder>assets</folder>
+		<folder>sql</folder>
+		<filename>ajax_input.php</filename>
+	</files>
+	<languages folder="language">
+		<language tag="ru-RU">ru-RU/ru-RU.mod_xdsoft_ymaps.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.mod_xdsoft_ymaps.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.mod_xdsoft_ymaps.ini</language>
+		<language tag="en-GB">en-GB/en-GB.mod_xdsoft_ymaps.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" label="MOD_XDSOFT_YMAPS_MAP" addfieldpath="/modules/mod_xdsoft_ymaps/fields">
+				<field name="map" type="map" default="" description=""></field>
+			</fieldset>
+			<fieldset name="map_settings" label="MOD_XDSOFT_YMAPS_SETTINGS_FIELDSET_LABEL">
+				<field name="width" type="text" default="auto" label="MOD_XDSOFT_YMAPS_WIDTH" required="true"/>
+				<field name="height" type="text" default="300" label="MOD_XDSOFT_YMAPS_HEIGHT" required="true"/>
+				<field type="spacer" hr="true" />
+				<field name="center" type="text" default="" label="MOD_XDSOFT_YMAPS_CENTER" required="true"/>
+				<field name="autocenter" type="checkbox" value="yes" label="MOD_XDSOFT_YMAPS_AUTOCENTER"/>
+				<field type="spacer" hr="true" />
+				<field name="zoom" type="text" default="6" label="MOD_XDSOFT_YMAPS_ZOOM" description="MOD_XDSOFT_YMAPS_ZOOM_DESCRIPTION" />  
+				<field type="spacer" hr="true" />
+				<field name="type" type="list" default="yandex#map" label="MOD_XDSOFT_YMAPS_TYPE" >
+					<option value="yandex#map">MOD_XDSOFT_YMAPS_TYPE_SCHEMA</option>
+					<option value="yandex#satellite">MOD_XDSOFT_YMAPS_TYPE_SATELLITE</option>
+					<option value="yandex#hybrid">MOD_XDSOFT_YMAPS_TYPE_HYBRID</option>
+					<option value="yandex#publicMap">MOD_XDSOFT_YMAPS_TYPE_PUBLIC</option>
+					<option value="yandex#publicMapHybrid">MOD_XDSOFT_YMAPS_TYPE_PUBLIC_SAT</option>
+				</field>
+				<field type="spacer" hr="true" />
+				<field name="autotraffic" type="checkbox" value="yes" label="MOD_XDSOFT_YMAPS_AUTOTRAFFICLAYER"/>
+				<field name="autotrafficupdate" type="number" default="4" value="yes" label="MOD_XDSOFT_YMAPS_AUTOTRAFFICLAYERUPDATE"/>
+			</fieldset>
+			<fieldset name="map_controls" label="MOD_XDSOFT_YMAPS_CONTROLS">
+				<field name="zoomControl"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_ZOOM" description="MOD_XDSOFT_YMAPS_CONTROLS_ZOOM_DESCR" default="yes"/>
+				<field name="typeSelector"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_TYPE" description="MOD_XDSOFT_YMAPS_CONTROLS_TYPE_DESCR" default="yes"/>
+				<field name="mapTools"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_TOOLS" description="MOD_XDSOFT_YMAPS_CONTROLS_TOOLS_DESCR" default="yes"/>
+				<field name="miniMap"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP" description="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP_DESCR"/>
+				<field name="searchControl"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH" description="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH_DESCR"/>
+				<field name="smallZoomControl"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM" description="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM_DESCR"/>
+				<field name="trafficControl"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC" description="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC_DESCR"/>
+			</fieldset>
+			<fieldset name="map_behaviors" label="MOD_XDSOFT_YMAPS_BEHAVIORS">
+				<field name="scrollZoom"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_SCROLLZOOM" description="MOD_XDSOFT_YMAPS_BEHAVIORS_SCROLLZOOM_DESCR" default="yes"/>
+				<field name="drag"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_DRAG" description="MOD_XDSOFT_YMAPS_BEHAVIORS_DRAG_DESCR" default="yes"/>
+				<field name="dblClickZoom"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_DBLCLICKZOOM" description="MOD_XDSOFT_YMAPS_BEHAVIORS_DBLCLICKZOOM_DESCR"/>
+				<field name="multiTouch"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_MULTITOUCH" description="MOD_XDSOFT_YMAPS_BEHAVIORS_MULTITOUCH_DESCR"/>
+				<field name="leftMouseButtonMagnifier"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_LEFTBUTTON" description="MOD_XDSOFT_YMAPS_BEHAVIORS_LEFTBUTTON_DESCR"/>
+				<field name="rightMouseButtonMagnifier"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON" description="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON_DESCR"/>
+			</fieldset>
+		</fields>
+	</config>
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/mysql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	 
+	<uninstall>
+		 <sql>
+			 <file driver="mysql" charset="utf8">sql/mysql/uninstall.mysql.utf8.sql</file>
+		 </sql>
+	</uninstall> 
+</extension>

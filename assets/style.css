@@ -1,0 +1,260 @@
+/**
+ * @copyright	Copyright (c) 2014 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ */
+.xdsoft_main_content *{
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+.xdsoft_main_content{
+	text-align:center;
+	margin-top:10px;
+}
+.xdsoft_main_content #work_area_map{
+	height:300px;
+	width:440px;
+	position:relative;
+}
+.xdsoft_main_content #sizer_for_map{
+	display:inline-block;
+	border:1px solid #ccc;
+	position:relative;
+}
+.xdsoft_main_content #sizer_for_map > a.icon-sizer{
+	position:absolute;
+	right:0px;
+	bottom:0px;
+	cursor: nw-resize;
+}
+.xdsoft_main_content input[type=text]{
+border:1px solid #ccc;
+padding:5px;
+}
+.xdsoft_main_content .btn {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
+	background:-moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf',GradientType=0);
+	background-color:#ededed;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:4px 6px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.xdsoft_main_content .btn:hover ,.btn.active{
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
+	background:-moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
+	background-color:#dfdfdf;
+}
+
+.xdsoft_main_content .btn.btn-disabled i{
+	opacity:0.5;
+}
+
+.xdsoft_main_content .btn:active,.btn.active {
+	position:relative;
+	top:1px;
+}
+
+.xdsoft_main_content .btn.btn-disabled{
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
+	background:-moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf',GradientType=0);
+	background-color:#ededed;
+	top:0px;
+}
+
+.xdsoft_main_content .toolbar{
+	position:absolute;
+	left:100px;
+	right:100px;
+	top:5px;
+	height:32px;
+	text-align:center;
+	z-index:99;
+}
+.xdsoft_main_content .icon{
+	width:32px;
+	height:32px;
+	background:url(./images/icons.png) no-repeat;
+	background-position:0px 0px;
+	content:"";
+	width:32px;
+	height:32px;
+	display:inline-block;
+	color:transparent;
+}
+
+.xdsoft_main_content .icon.icon-polygon{background-position:-128px 0px;}
+.xdsoft_main_content .icon.icon-polyline{background-position:-32px 0px;}
+.xdsoft_main_content .icon.icon-circle{background-position:-64px 0px;}
+.xdsoft_main_content .icon.icon-marker{background-position:-96px 0px;}
+.xdsoft_main_content .icon.icon-search{background-position:0px -32px;}
+.xdsoft_main_content .icon.icon-sizer{background-position:0px 0px;}
+.xdsoft_main_content .icon.icon-delete{background-position:-79px -32px; width:18px;height:21px;}
+
+
+.xdsoft_main_content .toolbar > a{
+	display:inline-block;
+	z-index:100;
+	padding:2px 2px 0px 2px;
+}
+.xdsoft_main_content .search_box input{
+	width:300px;
+}
+
+.xdsoft_main_content .search_box input.loaded{
+	background:url(./images/loader.gif) no-repeat right 10px center;
+}
+
+.xdsoft_main_content .search_box{
+margin-top:5px;
+text-align:left;
+left:0px;
+}
+
+
+/***************************************** AUTOCOMPLITE **************************************************************/
+
+.xdsoft_main_content .typeahead,
+.xdsoft_main_content .tt-query,
+.xdsoft_main_content .tt-hint {
+  outline: none;
+}
+
+.xdsoft_main_content .typeahead {
+  background-color: #fff;
+}
+
+.xdsoft_main_content .typeahead:focus {
+  border: 2px solid #0097cf;
+}
+
+.xdsoft_main_content .tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.xdsoft_main_content .tt-hint {
+  color: #999
+}
+
+.xdsoft_main_content .tt-dropdown-menu {
+  margin-top: -3px;
+  padding: 2px 0px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.xdsoft_main_content .tt-suggestion {
+  padding: 3px 5px;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.xdsoft_main_content .tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.xdsoft_main_content .tt-suggestion p {
+  margin: 0;
+}
+
+/*******************************************************************************************************************/
+.xdsoft_main_content #xdsoft_options{
+max-height:300px;
+overflow-y:auto;
+}
+.xdsoft_main_content #xdsoft_options > div{
+	display:none;
+}
+.xdsoft_main_content #xdsoft_options table{
+border-spacing: 0px;
+margin-bottom:3px;
+}
+.xdsoft_main_content #xdsoft_options th{
+	text-align:right;
+	padding-left:3px;
+	min-width:200px;
+}
+.xdsoft_main_content #xdsoft_options td textarea,
+.xdsoft_main_content #xdsoft_options td input{
+	margin:0px;
+	margin-top:3px;
+	width:200px;
+}
+.xdsoft_main_content #xdsoft_options td input[type=color]{
+	width:30px;
+	height:20px;
+	padding:0px;
+}
+.xdsoft_main_content #xdsoft_options{
+	position:absolute;
+	bottom:0px;
+	right:0px;
+	left:0px;
+	background:#fff;
+	z-index:105;
+	border-top:1px solid #ccc;
+	display:block;
+}
+
+.xdsoft_main_content #xdsoft_options a.close {
+position: absolute;
+width: 14px;
+height: 15px;
+right: 2px;
+top: 2px;
+background:url(./images/icons.png) no-repeat;
+background-position:-64px -32px;
+border: none;
+cursor:pointer;
+opacity:0.7;
+}
+
+.xdsoft_main_content #xdsoft_options a#delete {
+	position: absolute;
+	left: 2px;
+	top: 2px;
+	cursor:pointer;
+	opacity:0.7;
+}
+.xdsoft_main_content #xdsoft_options a.close:hover,
+.xdsoft_main_content #xdsoft_options a#delete:hover {
+	opacity:1.0;
+}
