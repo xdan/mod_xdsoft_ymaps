@@ -226,7 +226,7 @@ ymaps.ready(function () {
 						draggable: true,
 						visible:true
 					},{
-						iconContent: 'Метка',
+						iconContent: 'Marker',
 						balloonContent:"",
 						metaType:"Point"
 					});
@@ -362,7 +362,7 @@ var objects_finder = new Bloodhound({
   datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   remote: {
-		url:'http://geocode-maps.yandex.ru/1.x/?callback=?&format=json&geocode=%QUERY',
+		url:'http://geocode-maps.yandex.ru/1.x/?callback=?&format=json&lang='+xdsoft_lang+'&geocode=%QUERY',
 		filter: function(data) {
       return $.map(data.response.GeoObjectCollection.featureMember, function(val) { 
 				return { 
