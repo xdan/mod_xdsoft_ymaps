@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!--
 /**
- * @copyright	Copyright (c) 2014 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
+ * @copyright	Copyright (c) 2014 XDSoft (http://xdsoft.net) chupurnov@gmail.com. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 -->
@@ -9,10 +9,10 @@
 	<creationDate>March 2014</creationDate>
 	<author>Chupurnov Valeriy</author>
 	<authorEmail>chupurnov@gmail.com</authorEmail>
-	<authorUrl>http://xdan.ru</authorUrl>
-	<copyright>(c) xdan.ru</copyright>
+	<authorUrl>http://xdsoft.net</authorUrl>
+	<copyright>(c) xdsoft.net</copyright>
 	<license>GNU GPL</license>
-	<version>1.3.0</version>
+	<version>1.3.1</version>
 	<description>MOD_XDSOFT_YMAPS_DESCRIPTION</description>
 	<copyright>Copyright (c) 2014 xdsoft. All rights reserved.</copyright>
 	<files>
