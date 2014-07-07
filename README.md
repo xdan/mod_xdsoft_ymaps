@@ -1,6 +1,7 @@
 mod_xdsoft_ymaps
 ==============
 [Documentation][doc]
+
 [Русская документация][rudoc]
 
 Joomla module Yandex Maps Constructor
