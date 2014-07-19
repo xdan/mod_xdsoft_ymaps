@@ -92,10 +92,10 @@ class JFormFieldMap extends JFormField {
 		$lang = in_array(JFactory::getLanguage()->getTag(),array('ru-RU','en-US','tr-TR','uk-UA'))?JFactory::getLanguage()->getTag():'en-US';
 	
 		$doc->addScript("//api-maps.yandex.ru/2.0-stable/?load=package.full&lang=".$lang);
-		$doc->addScript("/modules/mod_xdsoft_ymaps/assets/jquery.min.js");
-		$doc->addScript("/modules/mod_xdsoft_ymaps/assets/typeahead.bundle.min.js");
-		$doc->addScript("/modules/mod_xdsoft_ymaps/assets/xdsoft_sizerbox.js");
-		$doc->addScript("/modules/mod_xdsoft_ymaps/assets/xdsoft_maps.js");
+		$doc->addScript(JURI::root()."/modules/mod_xdsoft_ymaps/assets/jquery.min.js");
+		$doc->addScript(JURI::root()."/modules/mod_xdsoft_ymaps/assets/typeahead.bundle.min.js");
+		$doc->addScript(JURI::root()."/modules/mod_xdsoft_ymaps/assets/xdsoft_sizerbox.js");
+		$doc->addScript(JURI::root()."/modules/mod_xdsoft_ymaps/assets/xdsoft_maps.js");
 		
 		$doc->addScriptDeclaration('window.xdsoft_lang = "'.$lang.'";');
 		
@@ -110,7 +110,7 @@ class JFormFieldMap extends JFormField {
 		}
 		
 		$doc->addScriptDeclaration($js.'});');
-		$doc->addHeadLink ("/modules/mod_xdsoft_ymaps/assets/style.css",'stylesheet');
+		$doc->addHeadLink (JURI::root()."/modules/mod_xdsoft_ymaps/assets/style.css",'stylesheet');
 	//	$html = '<i>asdfsad</i>';
 		return $html;
 	}
