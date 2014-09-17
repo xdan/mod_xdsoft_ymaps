@@ -5,7 +5,7 @@
  */
 defined('_JEXEC') or die;
 $lang = in_array(JFactory::getLanguage()->getTag(),array('ru-RU','en-US','tr-TR','uk-UA'))?JFactory::getLanguage()->getTag():'en-US';
-$doc->addScript('http://api-maps.yandex.ru/2.0/?load=package.full&wizard=mod_xdsoft_ymaps&lang='.$lang);
+$doc->addScript('//api-maps.yandex.ru/2.0/?load=package.full&wizard=mod_xdsoft_ymaps&lang='.$lang);
 ?>
 <div id="<?php echo $map_unique_id; ?>" style="width:<?php echo $width;?>px;height:<?php echo $height;?>px;"></div>
 <script>
