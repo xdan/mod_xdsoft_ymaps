@@ -47,9 +47,9 @@ if( $session->get('mod_xdsoft_ymaps')=='valid' ){
 				return get_magic_quotes_gpc()?stripslashes($value):$value;
 			}
 			
-			$object->coordinates 		= xdsoft_decode_magic($jinput->get('coordinates', '[0,0]','HTML'));
-			$object->options 			= xdsoft_decode_magic($jinput->get('options', '{}','HTML'));
-			$object->properties 		= xdsoft_decode_magic($jinput->get('properties', '{}','HTML'));
+			$object->coordinates 		= xdsoft_decode_magic($jinput->get('coordinates', '[0,0]','RAW'));
+			$object->options 			= xdsoft_decode_magic($jinput->get('options', '{}','RAW'));
+			$object->properties 		= xdsoft_decode_magic($jinput->get('properties', '{}','RAW'));
 			
 			$result = $db->updateObject('#__mod_xdsoft_ymaps', $object,'id');
 			if ( !$result ){
