@@ -10,21 +10,25 @@ require_once(JPATH_BASE.DS.'includes'.DS.'defines.php');
 require_once(JPATH_BASE.DS.'includes'.DS.'framework.php');
 JFactory::getApplication('administrator')->initialise();
 $session = JFactory::getSession(); 
+$jinput = JFactory::getApplication()->input;
 
 if( $session->get('mod_xdsoft_ymaps')=='valid' ){
-	$module_id = intval(@$_REQUEST['module_id']);
+	$module_id = intval( $jinput->get('module_id'));
 	$db = JFactory::getDBO();
 	if( !$module_id ){
 		$db->setQuery("SELECT max(id) as maxid FROM #__modules");
 		$mod = $db->loadObject();
 		$module_id = $mod->maxid+1;
 	}
-	$action = ( isset($_REQUEST['action']) and in_array($_REQUEST['action'],array('saveobject','deleteobject','index')) )?$_REQUEST['action']:'index';
+	$action =  $jinput->get('action', 'index');
+	$action = ( !empty($action) and in_array($action,array('saveobject','deleteobject','index')) )?$action:'index';
 	$res = array('error'=>0);
+
 	switch( $action ){
 		case 'saveobject':
-			$id = intval($_REQUEST['id']);
-			$type = (isset($_REQUEST['type'])and in_array($_REQUEST['type'],array('placemark','circle','polygon','polyline')))?$_REQUEST['type']:'placemark';
+			$id = $jinput->get('id', 0,'INT');
+			$type = $jinput->get('type', 'placemark');
+			$type = (!empty($type)and in_array($type,array('placemark','circle','polygon','polyline')))?$type:'placemark';
 			if( $id ){
 				$db->setQuery("SELECT * FROM #__mod_xdsoft_ymaps where module_id=$module_id and id=".$id);
 				$object = $db->loadObject();
@@ -38,9 +42,14 @@ if( $session->get('mod_xdsoft_ymaps')=='valid' ){
 				$db->insertObject('#__mod_xdsoft_ymaps', $object);
 				$object->id = $db->insertid();;
 			}
-			$object->coordinates 		= @$_REQUEST['coordinates'];
-			$object->options 				= @$_REQUEST['options'];
-			$object->properties 		= @$_REQUEST['properties'];
+			
+			function xdsoft_decode_magic ($value) {
+				return get_magic_quotes_gpc()?stripslashes($value):$value;
+			}
+			
+			$object->coordinates 		= xdsoft_decode_magic($jinput->get('coordinates', '[0,0]','HTML'));
+			$object->options 			= xdsoft_decode_magic($jinput->get('options', '{}','HTML'));
+			$object->properties 		= xdsoft_decode_magic($jinput->get('properties', '{}','HTML'));
 			
 			$result = $db->updateObject('#__mod_xdsoft_ymaps', $object,'id');
 			if ( !$result ){
@@ -51,7 +60,7 @@ if( $session->get('mod_xdsoft_ymaps')=='valid' ){
 			$res['id'] = $object->id;
 		break;
 		case 'deleteobject':
-			$id = intval($_REQUEST['id']);
+			$id = $jinput->get('id', 0,'INT');
 			$object = new stdClass();
 			$object->id = $id;
 			$object->del = 1;
