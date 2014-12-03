@@ -6,6 +6,7 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.form.formfield');
+include realpath(dirname(__FILE__).'/../').'/helper.php';
 
 class JFormFieldMap extends JFormField {
 
@@ -105,7 +106,7 @@ class JFormFieldMap extends JFormField {
 		$js = 'ymaps.ready(function () {';
 		
 		foreach($objects as $object){
-			if( !empty($object['coordinates']) )
+			if( !empty($object['coordinates']) and validateGeometry($object['coordinates']) )
 				$js.='addYMapsObject("'.$object['type'].'",'.$object['coordinates'].','.$object['id'].($object['options']?','.$object['options']:'').($object['properties']?','.$object['properties']:'').');'."\n";
 		}
 		

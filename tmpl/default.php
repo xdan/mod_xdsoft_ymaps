@@ -34,7 +34,7 @@ ymaps.ready(function(){
 	}
 	
 	foreach($objects as $object){
-		if( !empty($object['coordinates']) ){
+		if( !empty($object['coordinates']) and validateGeometry($object['coordinates']) ){
 			echo $map_unique_id.'.geoObjects.add(new ymaps.'.ucfirst($object['type']).'('.$object['coordinates'].','.$object['properties'].','.$object['options'].'));';
 		}
 	}

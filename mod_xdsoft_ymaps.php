@@ -7,6 +7,8 @@ defined('_JEXEC') or die;
 
 $doc = JFactory::getDocument();
 
+include 'helper.php';
+
 $width 			= $params->get("width");
 $height 		= $params->get("height");
 $center 		= $params->get("autocenter")?'ymaps.geolocation.latitude, ymaps.geolocation.longitude':$params->get("center");

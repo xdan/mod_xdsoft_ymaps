@@ -249,6 +249,35 @@ function deleteObject( object ){
 		}
 	},'json');
 }
+function validateGeometry(geometry){
+	var coords = geometry;
+	if (jQuery.type(geometry) == 'string') {
+		try{
+			coords = JSON.parse(geometry);
+		} catch (e) {
+			return false;
+		}
+	}
+	if (jQuery.type(coords) == 'array') {
+		if (coords.length) {
+			for (var r in coords) {
+				if (coords.hasOwnProperty(r)) {
+					if (jQuery.type(coords[r]) == 'array') {
+						if (!validateGeometry(coords[r])) {
+							return false;
+						}
+					} else {
+						if (isNaN(coords[r]) || coords[r] === null) {
+							return false;
+						}
+					}
+				}
+			}
+			return true;
+		}
+	}
+	return false;
+}
 function updateObject( object ){
 	clearTimeout(timeoutupdate);
 	timeoutupdate = setTimeout(function(){
@@ -258,7 +287,8 @@ function updateObject( object ){
 			optes = {properties:{},options:{}};
 		
 		geometry = object_type!='circle'?object.geometry.getCoordinates():[object.geometry.getCoordinates(),object.geometry.getRadius()];
-		if( geometry.length==0 ){
+		
+		if( geometry.length==0 || !validateGeometry(geometry)){
 			deleteObject(object);
 			return;
 		}
