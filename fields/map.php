@@ -106,7 +106,7 @@ class JFormFieldMap extends JFormField {
 		
 		foreach($objects as $object){
 			if( !empty($object['coordinates']) )
-				$js.='addYMapsObject("'.$object['type'].'",'.$object['coordinates'].','.$object['id'].($object['options']?','.$object['options']:'').($object['properties']?','.$object['properties']:'').');';
+				$js.='addYMapsObject("'.$object['type'].'",'.$object['coordinates'].','.$object['id'].($object['options']?','.$object['options']:'').($object['properties']?','.$object['properties']:'').');'."\n";
 		}
 		
 		$doc->addScriptDeclaration($js.'});');
