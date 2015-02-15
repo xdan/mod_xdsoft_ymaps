@@ -29,9 +29,10 @@ ymaps.ready(function(){
 	});
 <?php
 	$controls = array('zoomControl','typeSelector','mapTools','miniMap','searchControl','smallZoomControl','trafficControl');
-	foreach($controls as $control){
-		if( $params->get($control) )
+	foreach ($controls as $control) {
+		if ($params->get(strtolower($control))) {
 			echo $map_unique_id.'.controls.add("'.$control.'");';
+		}
 	}
 	
 	foreach($objects as $object){

@@ -12,7 +12,7 @@
 	<authorUrl>http://xdsoft.net</authorUrl>
 	<copyright>(c) xdsoft.net</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<version>1.4.4</version>
+	<version>1.4.6</version>
 	<description>MOD_XDSOFT_YMAPS_DESCRIPTION</description>
 	<copyright>Copyright (c) 2014 xdsoft. All rights reserved.</copyright>
 	<files>
@@ -43,7 +43,15 @@
 				<field name="height" type="text" default="300" label="MOD_XDSOFT_YMAPS_HEIGHT" required="true"/>
 				<field type="spacer" hr="true" />
 				<field name="center" type="text" default="" label="MOD_XDSOFT_YMAPS_CENTER" required="true"/>
-				<field name="autocenter" type="checkbox" value="yes" label="MOD_XDSOFT_YMAPS_AUTOCENTER"/>
+				<field 
+					name="autocenter" 
+					type="radio" 
+					class="btn-group" 
+					default="0" 
+					label="MOD_XDSOFT_YMAPS_AUTOCENTER">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				</field>
 				<field type="spacer" hr="true" />
 				<field name="zoom" type="text" default="6" label="MOD_XDSOFT_YMAPS_ZOOM" description="MOD_XDSOFT_YMAPS_ZOOM_DESCRIPTION" />  
 				<field type="spacer" hr="true" />
@@ -55,25 +63,67 @@
 					<option value="yandex#publicMapHybrid">MOD_XDSOFT_YMAPS_TYPE_PUBLIC_SAT</option>
 				</field>
 				<field type="spacer" hr="true" />
-				<field name="autotraffic" type="checkbox" value="yes" label="MOD_XDSOFT_YMAPS_AUTOTRAFFICLAYER"/>
-				<field name="autotrafficupdate" type="number" default="4" value="yes" label="MOD_XDSOFT_YMAPS_AUTOTRAFFICLAYERUPDATE"/>
+				<field name="autotraffic" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_AUTOTRAFFICLAYER">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="autotrafficupdate" type="number" default="4" value="1" label="MOD_XDSOFT_YMAPS_AUTOTRAFFICLAYERUPDATE"/>
 			</fieldset>
 			<fieldset name="map_controls" label="MOD_XDSOFT_YMAPS_CONTROLS">
-				<field name="zoomControl"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_ZOOM" description="MOD_XDSOFT_YMAPS_CONTROLS_ZOOM_DESCR" default="yes"/>
-				<field name="typeSelector"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_TYPE" description="MOD_XDSOFT_YMAPS_CONTROLS_TYPE_DESCR" default="yes"/>
-				<field name="mapTools"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_TOOLS" description="MOD_XDSOFT_YMAPS_CONTROLS_TOOLS_DESCR" default="yes"/>
-				<field name="miniMap"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP" description="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP_DESCR"/>
-				<field name="searchControl"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH" description="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH_DESCR"/>
-				<field name="smallZoomControl"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM" description="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM_DESCR"/>
-				<field name="trafficControl"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC" description="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC_DESCR"/>
+				<field name="typeselector" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_TYPE" description="MOD_XDSOFT_YMAPS_CONTROLS_TYPE_DESCR" default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="zoomcontrol" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_ZOOM" description="MOD_XDSOFT_YMAPS_CONTROLS_ZOOM_DESCR" default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="maptools" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_TOOLS" description="MOD_XDSOFT_YMAPS_CONTROLS_TOOLS_DESCR" default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="minimap" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP" description="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="searchcontrol"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH" description="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smallzoomcontrol" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM" description="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="trafficcontrol" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC" description="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
 			</fieldset>
 			<fieldset name="map_behaviors" label="MOD_XDSOFT_YMAPS_BEHAVIORS">
-				<field name="scrollZoom"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_SCROLLZOOM" description="MOD_XDSOFT_YMAPS_BEHAVIORS_SCROLLZOOM_DESCR" default="yes"/>
-				<field name="drag"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_DRAG" description="MOD_XDSOFT_YMAPS_BEHAVIORS_DRAG_DESCR" default="yes"/>
-				<field name="dblClickZoom"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_DBLCLICKZOOM" description="MOD_XDSOFT_YMAPS_BEHAVIORS_DBLCLICKZOOM_DESCR"/>
-				<field name="multiTouch"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_MULTITOUCH" description="MOD_XDSOFT_YMAPS_BEHAVIORS_MULTITOUCH_DESCR"/>
-				<field name="leftMouseButtonMagnifier"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_LEFTBUTTON" description="MOD_XDSOFT_YMAPS_BEHAVIORS_LEFTBUTTON_DESCR"/>
-				<field name="rightMouseButtonMagnifier"  value="yes"  type="checkbox" label="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON" description="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON_DESCR"/>
+				<field name="scrollzoom"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_SCROLLZOOM" description="MOD_XDSOFT_YMAPS_BEHAVIORS_SCROLLZOOM_DESCR" default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="drag"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_DRAG" description="MOD_XDSOFT_YMAPS_BEHAVIORS_DRAG_DESCR" default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="dblclickzoom"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_DBLCLICKZOOM" description="MOD_XDSOFT_YMAPS_BEHAVIORS_DBLCLICKZOOM_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="multitouch"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_MULTITOUCH" description="MOD_XDSOFT_YMAPS_BEHAVIORS_MULTITOUCH_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="leftmousebuttonmagnifier"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_LEFTBUTTON" description="MOD_XDSOFT_YMAPS_BEHAVIORS_LEFTBUTTON_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="rightmousebuttonmagnifier"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON" description="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON_DESCR">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
 			</fieldset>
 		</fields>
 	</config>
