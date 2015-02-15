@@ -83,7 +83,7 @@ ymaps.ready(function () {
 	var elm, controls = ['zoomControl','typeSelector','mapTools','miniMap','searchControl','smallZoomControl','trafficControl'];
 	
 	for(var r in controls){
-		elm = document.getElementById('jform_params_'+controls[r]);
+		elm = document.getElementById('jform_params_'+controls[r].toLowerCase()+'1');
 		
 		if( !elm )
 			continue;
@@ -101,7 +101,7 @@ ymaps.ready(function () {
 	var behaviors = ['scrollZoom','drag','dblClickZoom','multiTouch','rightMouseButtonMagnifier'];
 	
 	for(var r in behaviors){
-		elm = document.getElementById('jform_params_'+behaviors[r]);
+		elm = document.getElementById('jform_params_'+behaviors[r]+controls[r].toLowerCase()+'1');
 		
 		if( !elm )
 			continue;
