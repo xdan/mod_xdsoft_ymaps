@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright	Copyright (c) 2014 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright	Copyright (c) 2014 XDSoft (http://xdsoft.net) chupurnov@gmail.com. All rights reserved.
+ * @license		http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('JPATH_BASE') or die;
 
@@ -82,10 +82,13 @@ class JFormFieldMap extends JFormField {
 				</div>
 				<a class="icon icon-sizer"></a>
 			</div>
-			<div class="search_box">
-				<input placeholder="'.JText::_('MOD_XDSOFT_YMAPS_START_INPUT_YOUR_PLACE').'" type="text"/>
-				<input type="hidden" id="module_id" value="'.$module_id.'"/>
+			<div>
+				<div class="search_box">
+					<input placeholder="'.JText::_('MOD_XDSOFT_YMAPS_START_INPUT_YOUR_PLACE').'" type="text"/>
+					<input type="hidden" id="module_id" value="'.$module_id.'"/>
+				</div>
 			</div>
+			<div><a href="http://maps.xdan.ru" target="_blank">'.JText::_('MOD_XDSOFT_YMAPS_MAPSXDANRU').'</a></div>
 		</div>
 ';
 		$doc = JFactory::getDocument();
@@ -93,7 +96,11 @@ class JFormFieldMap extends JFormField {
 		$lang = in_array(JFactory::getLanguage()->getTag(),array('ru-RU','en-US','tr-TR','uk-UA'))?JFactory::getLanguage()->getTag():'en-US';
 	
 		$doc->addScript("//api-maps.yandex.ru/2.0-stable/?load=package.full&lang=".$lang);
-		$doc->addScript(JURI::root()."/modules/mod_xdsoft_ymaps/assets/jquery.min.js");
+		
+		if (version_compare( '3.0.0', JVERSION, '>')) {
+			$doc->addScript(JURI::root()."/modules/mod_xdsoft_ymaps/assets/jquery.min.js");
+		}
+
 		$doc->addScript(JURI::root()."/modules/mod_xdsoft_ymaps/assets/typeahead.bundle.min.js");
 		$doc->addScript(JURI::root()."/modules/mod_xdsoft_ymaps/assets/xdsoft_sizerbox.js");
 		$doc->addScript(JURI::root()."/modules/mod_xdsoft_ymaps/assets/xdsoft_maps.js");
@@ -112,7 +119,7 @@ class JFormFieldMap extends JFormField {
 		
 		$doc->addScriptDeclaration($js.'});');
 		$doc->addHeadLink (JURI::root()."/modules/mod_xdsoft_ymaps/assets/style.css",'stylesheet');
-	//	$html = '<i>asdfsad</i>';
+
 		return $html;
 	}
 }

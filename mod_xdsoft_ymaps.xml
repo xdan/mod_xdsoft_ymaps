@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?><!--
 /**
  * @copyright	Copyright (c) 2014 XDSoft (http://xdsoft.net) chupurnov@gmail.com. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @license		http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 -->
 <extension type="module" method="upgrade" client="site">
 	<name>MOD_XDSOFT_YMAPS</name>
-	<creationDate>March 2014</creationDate>
+	<creationDate>February 2015</creationDate>
 	<author>Chupurnov Valeriy</author>
 	<authorEmail>chupurnov@gmail.com</authorEmail>
 	<authorUrl>http://xdsoft.net</authorUrl>
 	<copyright>(c) xdsoft.net</copyright>
-	<license>GNU GPL</license>
-	<version>1.4.3</version>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>1.4.4</version>
 	<description>MOD_XDSOFT_YMAPS_DESCRIPTION</description>
 	<copyright>Copyright (c) 2014 xdsoft. All rights reserved.</copyright>
 	<files>
@@ -27,11 +27,11 @@
 		<filename>ajax_input.php</filename>
 		<filename>helper.php</filename>
 	</files>
-	<languages folder="language">
-		<language tag="ru-RU">ru-RU/ru-RU.mod_xdsoft_ymaps.ini</language>
-		<language tag="ru-RU">ru-RU/ru-RU.mod_xdsoft_ymaps.sys.ini</language>
-		<language tag="en-GB">en-GB/en-GB.mod_xdsoft_ymaps.ini</language>
-		<language tag="en-GB">en-GB/en-GB.mod_xdsoft_ymaps.sys.ini</language>
+	<languages>
+		<language tag="ru-RU">language/ru-RU/ru-RU.mod_xdsoft_ymaps.ini</language>
+		<language tag="ru-RU">language/ru-RU/ru-RU.mod_xdsoft_ymaps.sys.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.mod_xdsoft_ymaps.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.mod_xdsoft_ymaps.sys.ini</language>
 	</languages>
 	<config>
 		<fields name="params">
