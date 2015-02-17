@@ -12,9 +12,9 @@
 	<authorUrl>http://xdsoft.net</authorUrl>
 	<copyright>(c) xdsoft.net</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<version>1.4.6</version>
+	<version>1.4.7</version>
 	<description>MOD_XDSOFT_YMAPS_DESCRIPTION</description>
-	<copyright>Copyright (c) 2014 xdsoft. All rights reserved.</copyright>
+	<copyright>Copyright (c) 2015 xdsoft. All rights reserved.</copyright>
 	<files>
 		<filename module="mod_xdsoft_ymaps">mod_xdsoft_ymaps.php</filename>
 		<filename>mod_xdsoft_ymaps.xml</filename>
@@ -137,5 +137,8 @@
 		 <sql>
 			 <file driver="mysql" charset="utf8">sql/mysql/uninstall.mysql.utf8.sql</file>
 		 </sql>
-	</uninstall> 
+	</uninstall>
+	<updateservers>
+		 <server type="extension" priority="1" name="Konstructor Yandex kart ot xdan.ru"><![CDATA[http://xdan.ru/index.php?option=com_ars&view=update&task=stream&format=xml&id=2&dummy=extension.xml]]></server>
+	</updateservers>
 </extension>
