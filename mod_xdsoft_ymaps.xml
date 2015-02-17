@@ -63,7 +63,7 @@
 					<option value="yandex#publicMapHybrid">MOD_XDSOFT_YMAPS_TYPE_PUBLIC_SAT</option>
 				</field>
 				<field type="spacer" hr="true" />
-				<field name="autotraffic" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_AUTOTRAFFICLAYER">
+				<field name="autotraffic" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_AUTOTRAFFICLAYER" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
@@ -82,19 +82,19 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="minimap" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP" description="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP_DESCR">
+				<field name="minimap" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP" description="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="searchcontrol"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH" description="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH_DESCR">
+				<field name="searchcontrol"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH" description="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="smallzoomcontrol" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM" description="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM_DESCR">
+				<field name="smallzoomcontrol" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM" description="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="trafficcontrol" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC" description="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC_DESCR">
+				<field name="trafficcontrol" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC" description="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
@@ -108,19 +108,19 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="dblclickzoom"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_DBLCLICKZOOM" description="MOD_XDSOFT_YMAPS_BEHAVIORS_DBLCLICKZOOM_DESCR">
+				<field name="dblclickzoom"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_DBLCLICKZOOM" description="MOD_XDSOFT_YMAPS_BEHAVIORS_DBLCLICKZOOM_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="multitouch"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_MULTITOUCH" description="MOD_XDSOFT_YMAPS_BEHAVIORS_MULTITOUCH_DESCR">
+				<field name="multitouch"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_MULTITOUCH" description="MOD_XDSOFT_YMAPS_BEHAVIORS_MULTITOUCH_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="leftmousebuttonmagnifier"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_LEFTBUTTON" description="MOD_XDSOFT_YMAPS_BEHAVIORS_LEFTBUTTON_DESCR">
+				<field name="leftmousebuttonmagnifier"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_LEFTBUTTON" description="MOD_XDSOFT_YMAPS_BEHAVIORS_LEFTBUTTON_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="rightmousebuttonmagnifier"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON" description="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON_DESCR">
+				<field name="rightmousebuttonmagnifier"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON" description="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>

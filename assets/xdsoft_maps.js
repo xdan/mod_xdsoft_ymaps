@@ -80,9 +80,13 @@ ymaps.ready(function () {
 	
 	sizerBox = new SizerBox(map);
 	
-	var elm, controls = ['zoomControl','typeSelector','mapTools','miniMap','searchControl','smallZoomControl','trafficControl'];
+	var 
+		elm, 
+		controls = ['zoomControl','typeSelector','mapTools','miniMap','searchControl','smallZoomControl','trafficControl'],
+		behaviors = ['scrollZoom','drag','dblClickZoom','multiTouch','rightMouseButtonMagnifier'],		
+		r;
 	
-	for(var r in controls){
+	for(r = 0; r < controls.length; r = r+1){
 		elm = document.getElementById('jform_params_'+controls[r].toLowerCase()+'1');
 		
 		if( !elm )
@@ -98,15 +102,12 @@ ymaps.ready(function () {
 		});
 	}
 	
-	var behaviors = ['scrollZoom','drag','dblClickZoom','multiTouch','rightMouseButtonMagnifier'];
-	
-	for(var r in behaviors){
+	for(r = 0; r < behaviors.length; r = r+1){
 		elm = document.getElementById('jform_params_'+behaviors[r]+controls[r].toLowerCase()+'1');
 		
 		if( !elm )
 			continue;
 		
-
 		map.behaviors[elm.checked?'enable':'disable'](behaviors[r]);
 		
 		$(elm).on('change',function(){
@@ -294,9 +295,11 @@ function updateObject( object ){
 		}
 		
 		for(var _name in _opt){
-			for(var _key=0;_key<_opt[_name].length;_key++){
-				if( object[_name].get(_opt[_name][_key])!==undefined ){
-					optes[_name][_opt[_name][_key]] = object[_name].get(_opt[_name][_key]);
+			if (_opt.hasOwnProperty(_name)) {
+				for(var _key=0;_key<_opt[_name].length;_key++){
+					if( object[_name].get(_opt[_name][_key])!==undefined ){
+						optes[_name][_opt[_name][_key]] = object[_name].get(_opt[_name][_key]);
+					}
 				}
 			}
 		}
