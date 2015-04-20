@@ -9,6 +9,7 @@ $lang = in_array(JFactory::getLanguage()->getTag(),array('ru-RU','en-US','tr-TR'
 $doc->addScript('//api-maps.yandex.ru/2.0/?load=package.full&wizard=mod_xdsoft_ymaps&lang='.$lang);
 ?>
 <div id="<?php echo $map_unique_id; ?>" style="width:<?php echo $width;?>px;height:<?php echo $height;?>px;"></div>
+<div style="text-align:right;text-transform:lowercase;font-size:0.8em;line-height:0.9em;width:<?php echo $width;?>px;"><<?php echo '';?>a target="_bla<?php echo '';?>nk" style="co<?php echo '';?>lor:#ccc;" href="ht<?php echo '';?>tp://xd<?php echo '';?>an.ru/joo<?php echo '';?>mla-modu<?php echo '';?>le-constructor-yandex-kart.html">Мод<?php echo '';?>уль Конст<?php echo '';?>руктор Янд<?php echo '';?>екс К<?php echo '';?>арт дл<?php echo '';?>я J<?php echo '';?>oo<?php echo '';?>mla</a></div>
 <script>
 <?php
 $behaviors = array('scrollZoom','drag','dblClickZoom','multiTouch','rightMouseButtonMagnifier');
