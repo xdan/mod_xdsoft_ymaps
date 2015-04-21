@@ -11,7 +11,7 @@ include 'helper.php';
 
 $width 			= $params->get("width", 'auto');
 $height 		= $params->get("height", '300px');
-$center 		= $params->get("autocenter", 0) ? '55,34':$params->get("center");
+$center 		= $params->get("autocenter", 0) ? '55,34':$params->get("center", '55,34');
 $zoom 			= $params->get("zoom", 10);
 $type 			= $params->get("type", 'yandex#map');
 
