@@ -11,7 +11,7 @@ mod_xdsoft_ymaps
 
 Визуальный редактор
 
-![ScreenShot](https://raw.githubusercontent.com/xdan/mod_xdsoft_ymaps/master/screen/1.png)
+![ScreenShot](https://raw.githubusercontent.com/xdan/mod_xdsoft_ymaps/master/screen/1.jpg)
 
 Настрока карты
 
@@ -19,7 +19,7 @@ mod_xdsoft_ymaps
 
 Список объектов
 
-![ScreenShot](https://raw.githubusercontent.com/xdan/mod_xdsoft_ymaps/master/screen/2.0.png)
+![ScreenShot](https://raw.githubusercontent.com/xdan/mod_xdsoft_ymaps/master/screen/version2.jpg)
 
 #### Список изменений
 ------------
