@@ -1,8 +1,9 @@
 mod_xdsoft_ymaps - модуль Joomla для Яндекс Карт
 ==============
+[Документация для модуля Яндекс Карт][rudoc]
+
 [Documentation][doc]
 
-[Русская документация для модуля Яндекс Карт][rudoc]
 
 Joomla module Yandex Maps Constructor
 
