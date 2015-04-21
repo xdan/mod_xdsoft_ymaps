@@ -17,7 +17,8 @@ mod_xdsoft_ymaps
 ![ScreenShot](https://raw.githubusercontent.com/xdan/mod_xdsoft_ymaps/master/screen/2.png)
 
 Список объектов
-![ScreenShot](https://raw.githubusercontent.com/xdan/mod_xdsoft_ymaps/master/screen/2.png)
+
+![ScreenShot](https://raw.githubusercontent.com/xdan/mod_xdsoft_ymaps/master/screen/2.0.png)
 
 ##### Список изменений
 ------------
