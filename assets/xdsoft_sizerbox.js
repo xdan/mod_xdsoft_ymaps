@@ -2,41 +2,42 @@
  * @copyright	Copyright (c) 2014 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
-var SizerBox = function( map ){
-
+var SizerBox = function(map, ymaps){
 	var proj = map.options.get('projection'),
-			coords = [], 
-			bounde = [], 
-			self = this,
-			center = [],
-			scale = [1,1],
-			x = 0,
-			y = 0,
-			metaType = 'polygon',
-			sizerBoxContainer = null, 
-			workObject = null,
-			oldFocusObject = null,
-			bc = map.getCenter(),
-			zoom = map.getZoom(),
-			supportMetaTypes = {polyline:1,linestring:1,polygon:1,circle:1};
+		coords = [], 
+		bounde = [], 
+		self = this,
+		center = [],
+		scale = [1,1],
+		x = 0,
+		y = 0,
+		metaType = 'polygon',
+		sizerBoxContainer = null, 
+		workObject = null,
+		oldFocusObject = null,
+		bc = map.getCenter(),
+		zoom = map.getZoom(),
+		supportMetaTypes = {polyline:1,linestring:1,polygon:1,circle:1};
+
 	var  isset = function( b ){ return typeof b!=='undefined'; }		
 	var  isArray = function( b ){ return ( Object.prototype.toString.call( b ) === '[object Array]' );};	
-	var findBoundeBox = function ( coords ){
-		if( !isset(coords) ){
+	var findBoundeBox = function (coords){
+		if (!isset(coords)){
 			coords = workObject.geometry.getCoordinates();
 			
-			if( !coords.length ){
+			if (!coords || !coords.length){
 				self.hide();
 				return [map.getCenter(),map.getCenter()];
 			}
-				
-			if( self.metaType=='circle' ){
+			//return 	workObject.geometry.getBounds();
+
+			if (self.metaType=='circle') {
 				var direction = [1, Math.cos(Math.PI / 2)],
-						direction1 = [Math.sin(Math.PI), -1],
-						one = ymaps.coordSystem.geo.solveDirectProblem(coords, direction, workObject.geometry.getRadius()).endPoint,
-						two = ymaps.coordSystem.geo.solveDirectProblem(coords, direction1, workObject.geometry.getRadius()).endPoint,
-						step = [Math.abs(one[0]-coords[0]),Math.abs(two[1]-coords[1])];
-						
+					direction1 = [Math.sin(Math.PI), -1],
+					one = ymaps.coordSystem.geo.solveDirectProblem(coords, direction, workObject.geometry.getRadius()).endPoint,
+					two = ymaps.coordSystem.geo.solveDirectProblem(coords, direction1, workObject.geometry.getRadius()).endPoint,
+					step = [Math.abs(one[0]-coords[0]),Math.abs(two[1]-coords[1])];
+					
 				coords  = [[coords[0]+step[0],coords[1]+step[1]],[coords[0],coords[1]+step[1]],[coords[0]+step[0],coords[1]],[coords[0]-step[0],coords[1]-step[1]]];
 			}
 		};
@@ -110,8 +111,9 @@ var SizerBox = function( map ){
 			//иконка вращения
 			sizerBoxContainer[2] = new ymaps.GeoObject({
 				geometry: {
-						type: "Point",
-						coordinates: []
+					type: "Point",
+					//preset: "islands#yellowCircleIcon",
+					coordinates: []
 				},
 				properties: {
 						hintContent: "Вращать",
@@ -120,7 +122,7 @@ var SizerBox = function( map ){
 				iconImageHref:'/modules/mod_xdsoft_ymaps/assets/images/rotate.png',
 				iconImageSize: [16, 16], // размеры картинки
 				iconImageOffset: [-3,-3],// смещение картинки
-				preset: "twirl#darkorangeIcon",
+				preset: "islands#yellowCircleIcon",
 				draggable: true,
 			});
 		
@@ -274,7 +276,7 @@ var SizerBox = function( map ){
 	};
 	
 	self.init = function( obj ){
-		var metaType = obj.properties.get('metaType')?obj.properties.get('metaType').toLowerCase():'polygon';
+		var metaType = obj.properties.getAll().metaType?obj.properties.getAll().metaType.toLowerCase():'polygon';
 		if( !supportMetaTypes[metaType] )
 			return;
 			

@@ -12,7 +12,7 @@
 	<authorUrl>http://xdsoft.net</authorUrl>
 	<copyright>(c) xdsoft.net</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<version>1.4.8</version>
+	<version>2.0.0</version>
 	<description>MOD_XDSOFT_YMAPS_DESCRIPTION</description>
 	<copyright>Copyright (c) 2015 xdsoft. All rights reserved.</copyright>
 	<files>
@@ -39,8 +39,9 @@
 				<field name="map" type="map" default="" description=""></field>
 			</fieldset>
 			<fieldset name="map_settings" label="MOD_XDSOFT_YMAPS_SETTINGS_FIELDSET_LABEL">
+				<field name="api" type="hidden" default="//api-maps.yandex.ru/2.1/?lang="/>
 				<field name="width" type="text" default="auto" label="MOD_XDSOFT_YMAPS_WIDTH" required="true"/>
-				<field name="height" type="text" default="300" label="MOD_XDSOFT_YMAPS_HEIGHT" required="true"/>
+				<field name="height" type="text" default="300px" label="MOD_XDSOFT_YMAPS_HEIGHT" required="true"/>
 				<field type="spacer" hr="true" />
 				<field name="center" type="text" default="" label="MOD_XDSOFT_YMAPS_CENTER" required="true"/>
 				<field 
@@ -70,6 +71,22 @@
 				<field name="autotrafficupdate" type="number" default="4" value="1" label="MOD_XDSOFT_YMAPS_AUTOTRAFFICLAYERUPDATE"/>
 			</fieldset>
 			<fieldset name="map_controls" label="MOD_XDSOFT_YMAPS_CONTROLS">
+				<field name="fullscreenControl" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_FULLSCREENCONTROL" description="MOD_XDSOFT_YMAPS_FULLSCREENCONTROL_DESCR" default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="geolocationControl" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_GEOLOCATIONCONTROL" description="MOD_XDSOFT_YMAPS_GEOLOCATIONCONTROL_DESCR" default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="routeEditor" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_ROUTEEDITOR" description="MOD_XDSOFT_YMAPS_ROUTEEDITOR_DESCR" default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="rulerControl" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_RULERCONTROL" description="MOD_XDSOFT_YMAPS_RULERCONTROL_DESCR" default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
 				<field name="typeselector" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_TYPE" description="MOD_XDSOFT_YMAPS_CONTROLS_TYPE_DESCR" default="1">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
@@ -78,22 +95,22 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="maptools" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_TOOLS" description="MOD_XDSOFT_YMAPS_CONTROLS_TOOLS_DESCR" default="1">
+				<!--<field name="maptools" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_TOOLS" description="MOD_XDSOFT_YMAPS_CONTROLS_TOOLS_DESCR" default="1">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
 				<field name="minimap" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP" description="MOD_XDSOFT_YMAPS_CONTROLS_MINI_MAP_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
-				</field>
+				</field>-->
 				<field name="searchcontrol"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH" description="MOD_XDSOFT_YMAPS_CONTROLS_SEARCH_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="smallzoomcontrol" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM" description="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM_DESCR" default="0">
+				<!--<field name="smallzoomcontrol" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM" description="MOD_XDSOFT_YMAPS_CONTROLS_SMALLZOOM_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
-				</field>
+				</field>-->
 				<field name="trafficcontrol" type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC" description="MOD_XDSOFT_YMAPS_CONTROLS_TRAFFIC_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
@@ -121,6 +138,14 @@
 					<option value="1">JYES</option>
 				</field>
 				<field name="rightmousebuttonmagnifier"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON" description="MOD_XDSOFT_YMAPS_BEHAVIORS_RIGHTBUTTON_DESCR" default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="ruler"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_RULER" description="MOD_XDSOFT_YMAPS_BEHAVIORS_RULER_DESCR" default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="routeeditor"  type="radio" class="btn-group" label="MOD_XDSOFT_YMAPS_BEHAVIORS_ROUTEEDITOR" description="MOD_XDSOFT_YMAPS_BEHAVIORS_ROUTEEDITOR_DESCR" default="0">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>

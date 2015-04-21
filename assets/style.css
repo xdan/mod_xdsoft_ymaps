@@ -18,7 +18,7 @@
 }
 .xdsoft_main_content #sizer_for_map{
 	display:inline-block;
-	border:1px solid #ccc;
+	/*border:1px solid #ccc;*/
 	position:relative;
 }
 .xdsoft_main_content #sizer_for_map > a.icon-sizer{
@@ -26,10 +26,12 @@
 	right:0px;
 	bottom:0px;
 	cursor: nw-resize;
+	margin: 0px;
 }
 .xdsoft_main_content input[type=text]{
-border:1px solid #ccc;
-padding:5px;
+	border:1px solid #ccc;
+	padding:5px;
+	height: 30px;
 }
 .xdsoft_main_content .btn {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -231,7 +233,7 @@ margin-bottom:3px;
 	left:0px;
 	background:#fff;
 	z-index:105;
-	border-top:1px solid #ccc;
+	/*border-top:1px solid #ccc;*/
 	display:block;
 }
 
@@ -258,4 +260,35 @@ opacity:0.7;
 .xdsoft_main_content #xdsoft_options a.close:hover,
 .xdsoft_main_content #xdsoft_options a#delete:hover {
 	opacity:1.0;
+}
+#xdsoft_objects_list{
+max-height:500px;
+overflow-y:auto;
+}
+#xdsoft_objects_list>div{
+	display:block;
+	padding:5px;
+}
+
+#xdsoft_objects_list>div{
+	background:rgba(255, 201, 201, 0.68);
+}
+#xdsoft_objects_list>div.saved {
+	background:rgba(0, 128, 0, 0.1);
+}
+#xdsoft_objects_list>div:hover{
+	background:#ccc;
+}
+#xdsoft_objects_list>div:hover>span{
+	text-decoration:underline;
+}
+#xdsoft_objects_list>div{
+text-align:left;
+}
+#xdsoft_objects_list>div>span{
+cursor:pointer;
+}
+#xdsoft_objects_list>div>a{
+float:right;
+cursor:pointer;
 }

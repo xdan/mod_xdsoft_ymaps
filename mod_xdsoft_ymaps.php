@@ -4,26 +4,26 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;
-
+#error_reporting(E_ALL);
 $doc = JFactory::getDocument();
 
 include 'helper.php';
 
-$width 			= $params->get("width");
-$height 		= $params->get("height");
-$center 		= $params->get("autocenter")?'ymaps.geolocation.latitude, ymaps.geolocation.longitude':$params->get("center");
-$zoom 			= $params->get("zoom");
-$type 			= $params->get("type");
+$width 			= $params->get("width", 'auto');
+$height 		= $params->get("height", '300px');
+$center 		= $params->get("autocenter", 0) ? '55,34':$params->get("center");
+$zoom 			= $params->get("zoom", 10);
+$type 			= $params->get("type", 'yandex#map');
 
-$autotrafficupdate 			= floatval($params->get('autotrafficupdate'));
+if (is_numeric($width)) {
+	$width.='px';
+}
+if (is_numeric($height)) {
+	$height.='px';
+}
 
-if( !$autotrafficupdate )
-	$autotrafficupdate = 4;
+$autotrafficupdate 			= floatval($params->get('autotrafficupdate', 4));
 
-if (empty($width)) 
-	$width = "auto";
-if (empty($height)) 
-	$height = "300px";
 	
 $map_unique_id = 'map'.uniqid();
 $db = JFactory::getDBO();
