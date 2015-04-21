@@ -3,7 +3,8 @@
  * @copyright	Copyright (c) 2014 XDSoft (http://xdsoft.net) chupurnov@gmail.com. All rights reserved.
  * @license		http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
-define('_JEXEC', 1);
+;
+defined('_JEXEC') or define('_JEXEC', 1) or die; //security you will find below on line 17. Please, it very important file for this extension
 define('JPATH_BASE', dirname(__FILE__) . '/../../' );
 define('DS', DIRECTORY_SEPARATOR);
 require_once(JPATH_BASE.DS.'includes'.DS.'defines.php');
@@ -13,7 +14,8 @@ JFactory::getApplication('administrator')->initialise();
 $session = JFactory::getSession(); 
 $jinput = JFactory::getApplication()->input;
 
-if( $session->get('mod_xdsoft_ymaps')=='valid' ){
+//security
+if ($session->get('mod_xdsoft_ymaps')=='valid'){
 	$module_id = intval( $jinput->get('module_id'));
 	$db = JFactory::getDBO();
 	if( !$module_id ){

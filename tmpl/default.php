@@ -24,10 +24,14 @@ $behaviors = array(
 );
 $bhvrs = array();
 foreach($behaviors as $behavior){
-	if( $params->get(strtolower($behavior)) )
+	if ($params->get(strtolower($behavior))) {
 		$bhvrs[]=$behavior;
+	}
 }
 $bhvrs = count($bhvrs)?'["'.implode('","',$bhvrs).'"]':'[]';
+if ($params->get(strtolower('scrollZoom')) === null) {
+	$bhvrs = '["drag","scrollZoom","dblClickZoom"]';
+}
 ?>
 ymaps.ready(function(){
 	var <?php echo $map_unique_id; ?> = new ymaps.Map("<?php echo $map_unique_id; ?>", {

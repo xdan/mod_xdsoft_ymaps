@@ -1,4 +1,10 @@
 <?php
+/**
+ * @copyright	Copyright (c) 2014 XDSoft (http://xdsoft.net) chupurnov@gmail.com. All rights reserved.
+ * @license		http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ */
+defined('JPATH_BASE') or die;
+
 return array (
   'islands#icon' => 'islands-blueIcon.png',
   'islands#dotIcon' => 'islands-blueDotIcon.png',
