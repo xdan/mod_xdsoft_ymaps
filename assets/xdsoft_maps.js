@@ -289,7 +289,7 @@
 	timeoutupdate = 0;
 	_opt = {options: ['strokeColor', 'strokeOpacity', 'strokeWidth', 'fillColor', 'fillOpacity', 'preset'], properties: ['metaType', 'iconContent', 'balloonContent']};
 	function deleteObject(object) {
-		$.post('/modules/mod_xdsoft_ymaps/ajax_input.php', {action: 'deleteobject', id: object.options.get('xdsoft_id'), module_id: window.module_id}, function (resp) {
+		$.post(window.baseurl + 'modules/mod_xdsoft_ymaps/ajax_input.php', {action: 'deleteobject', id: object.options.get('xdsoft_id'), module_id: window.module_id}, function (resp) {
 			if (!resp.error) {
 				window.map.geoObjects.remove(object);
 				window.sizerBox.hide();
@@ -368,7 +368,7 @@
 				}
 			}
 
-			$.post('/modules/mod_xdsoft_ymaps/ajax_input.php', {
+			$.post(window.baseurl + 'modules/mod_xdsoft_ymaps/ajax_input.php', {
 				action: 'saveobject',
 				type: object_type,
 				module_id: window.module_id,

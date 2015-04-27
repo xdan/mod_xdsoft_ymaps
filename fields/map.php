@@ -114,7 +114,10 @@ class JFormFieldMap extends JFormField {
 		$doc->addScript(JURI::root()."/modules/mod_xdsoft_ymaps/assets/xdsoft_sizerbox.js");
 		$doc->addScript(JURI::root()."/modules/mod_xdsoft_ymaps/assets/xdsoft_maps.js");
 		
-		$doc->addScriptDeclaration('window.xdsoft_lang = "'.$lang.'";');
+		$doc->addScriptDeclaration(
+			'window.xdsoft_lang = "'.$lang.'";'.
+			'window.baseurl = "'.JURI::root().'";'
+		);
 		
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT * FROM #__mod_xdsoft_ymaps where del=0 and module_id=$module_id");
