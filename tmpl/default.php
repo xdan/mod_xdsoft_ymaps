@@ -38,6 +38,7 @@ ymaps.ready(function(){
 		center: [<?php echo $center;?>],
 		zoom: 	<?php echo intval($zoom);?>,
 		type: 	'<?php echo $type;?>',
+		controls: [],
 		flying: true,
 		behaviors: <?php echo $bhvrs;?>
 	});
@@ -56,7 +57,7 @@ ymaps.ready(function(){
 		//'smallZoomControl',//2.0
 	);
 	foreach ($controls as $control) {
-		if ($params->get(strtolower($control))) {
+		if ($params->get(strtolower($control), 1)) {
 			echo $map_unique_id.'.controls.add("'.$control.'");';
 		}
 	}
