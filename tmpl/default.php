@@ -41,7 +41,7 @@ ymaps.ready(function(){
 		controls: [],
 		flying: true,
 		behaviors: <?php echo $bhvrs;?>
-	}<?
+	}<?php
 		if (!$params->get('suppressmapopenblock', 1)) {
 			echo ', {suppressMapOpenBlock: true}';
 		}
