@@ -1,5 +1,5 @@
 /**
- * @copyright	Copyright (c) 2014 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
+ * @copyright	Copyright (c) 2015 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 .xdsoft_main_content *{
@@ -10,11 +10,13 @@
 .xdsoft_main_content{
 	text-align:center;
 	margin-top:10px;
+	margin-left:-180px;
 }
 .xdsoft_main_content #work_area_map{
 	height:300px;
 	width:440px;
 	position:relative;
+	border:1px solid #ccc;
 }
 .xdsoft_main_content #sizer_for_map{
 	display:inline-block;
@@ -45,9 +47,9 @@
 	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf',GradientType=0);
 	background-color:#ededed;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	border-radius:3px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
 	border:1px solid #dcdcdc;
 	display:inline-block;
 	cursor:pointer;
@@ -74,11 +76,6 @@
 	opacity:0.5;
 }
 
-.xdsoft_main_content .btn:active,.btn.active {
-	position:relative;
-	top:1px;
-}
-
 .xdsoft_main_content .btn.btn-disabled{
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
 	background:-moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
@@ -99,10 +96,9 @@
 	height:32px;
 	text-align:center;
 	z-index:99;
+	opacity: 0.8;
 }
 .xdsoft_main_content .icon{
-	width:32px;
-	height:32px;
 	background:url(./images/icons.png) no-repeat;
 	background-position:0px 0px;
 	content:"";
@@ -110,12 +106,14 @@
 	height:32px;
 	display:inline-block;
 	color:transparent;
+	vertical-align:top;
 }
 
-.xdsoft_main_content .icon.icon-polygon{background-position:-128px 0px;}
+.xdsoft_main_content .icon.icon-polygon{background-position:-127px -1px;}
 .xdsoft_main_content .icon.icon-polyline{background-position:-32px 0px;}
-.xdsoft_main_content .icon.icon-circle{background-position:-64px 0px;}
-.xdsoft_main_content .icon.icon-marker{background-position:-96px 0px;}
+.xdsoft_main_content .icon.icon-circle{background-position:-63px 0px;}
+.xdsoft_main_content .icon.icon-circle:before{content:'';}
+.xdsoft_main_content .icon.icon-marker{background-position:-96px -4px;}
 .xdsoft_main_content .icon.icon-search{background-position:0px -32px;}
 .xdsoft_main_content .icon.icon-sizer{background-position:0px 0px;}
 .xdsoft_main_content .icon.icon-delete{background-position:-79px -32px; width:18px;height:21px;}
@@ -128,6 +126,7 @@
 }
 .xdsoft_main_content .search_box input{
 	width:300px;
+	border-radius: 0px;
 }
 
 .xdsoft_main_content .search_box input.loaded{
@@ -263,6 +262,7 @@ opacity:0.7;
 }
 #xdsoft_objects_list{
 max-height:500px;
+border:1px solid #ccc;
 overflow-y:auto;
 }
 #xdsoft_objects_list>div{

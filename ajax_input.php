@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright	Copyright (c) 2014 XDSoft (http://xdsoft.net) chupurnov@gmail.com. All rights reserved.
+ * @copyright	Copyright (c) 2015 XDSoft (http://xdsoft.net) chupurnov@gmail.com. All rights reserved.
  * @license		http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or define('_JEXEC', 1) or die; //security you will find below on line 17. Please, it very important file for this extension

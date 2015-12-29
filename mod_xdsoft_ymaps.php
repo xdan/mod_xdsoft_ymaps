@@ -1,10 +1,10 @@
 <?php
 /**
- * @copyright	Copyright (c) 2014 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
+ * @copyright	Copyright (c) 2015 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;
-#error_reporting(E_ALL);
+
 $doc = JFactory::getDocument();
 
 include 'helper.php';
@@ -27,6 +27,6 @@ $autotrafficupdate 			= floatval($params->get('autotrafficupdate', 4));
 	
 $map_unique_id = 'map'.uniqid();
 $db = JFactory::getDBO();
-$db->setQuery("SELECT * FROM #__mod_xdsoft_ymaps where del=0 and module_id=".$module->id);
+$db->setQuery("SELECT * FROM #__mod_xdsoft_ymaps where del=0 and module_id=".(int)$module->id);
 $objects = $db->loadAssocList();
 require JModuleHelper::getLayoutPath('mod_xdsoft_ymaps', $params->get('layout', 'default'));

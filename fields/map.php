@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright	Copyright (c) 2014 XDSoft (http://xdsoft.net) chupurnov@gmail.com. All rights reserved.
+ * @copyright	Copyright (c) 2015 XDSoft (http://xdsoft.net) chupurnov@gmail.com. All rights reserved.
  * @license		http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('JPATH_BASE') or die;
@@ -36,6 +36,9 @@ class JFormFieldMap extends JFormField {
 		<div class="xdsoft_main_content">
 			<div class="span4" id="xdsoft_objects_list"></div>
 			<div class="span8" style="text-align:left">
+				<a style="display:block;margin-bottom:10px;" title="Переходи на PRO компонент Яндекс Карты на Joomla" href="http://xdan.ru/komponent-yandeks-karty-dlya-joomla.html">
+					<img src="'.JURI::root().'modules/mod_xdsoft_ymaps/assets/images/little.png" alt="Переходи на PRO компонент Яндекс Карты на Joomla">
+				</a>
 				<div id="sizer_for_map">
 					<div id="work_area_map">
 						<div class="toolbar">

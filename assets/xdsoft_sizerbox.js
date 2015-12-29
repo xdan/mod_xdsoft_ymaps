@@ -1,5 +1,5 @@
 /**
- * @copyright	Copyright (c) 2014 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
+ * @copyright	Copyright (c) 2015 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 var SizerBox = function(map, ymaps){

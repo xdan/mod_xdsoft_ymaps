@@ -1,14 +1,127 @@
 /**
- * @copyright	Copyright (c) 2014 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright Copyright (c) 2015 XDSoft (http://xdan.ru) chupurnov@gmail.com. All rights reserved.
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  */
-/*global ymaps,window,document,clearTimeout,setTimeout,SizerBox,initForm,updateObject,addYMapsObject,Bloodhound, xdsoft_lang,alert,confirm,deleteObject*/
+/*global ymaps,window,document,clearTimeout,console, setTimeout,SizerBox,updateObject,addYMapsObject,Bloodhound, xdsoft_lang,alert,confirm,deleteObject*/
 (function ($) {
 	"use strict";
-	var objects = [], timeoutupdate, _opt;
+	var timeoutupdate, _opt;
 	window.map = null;
 	window.module_id = false;
 	window.sizerBox = false;
+	function deleteObject(object) {
+		$.post(window.baseurl + 'modules/mod_xdsoft_ymaps/ajax_input.php', {action: 'deleteobject', id: object.options.get('xdsoft_id'), module_id: window.module_id}, function (resp) {
+			if (!resp.error) {
+				window.map.geoObjects.remove(object);
+				window.sizerBox.hide();
+				if (object.xditem) {
+					object.xditem.remove();
+				}
+				object = null;
+				$('.toolbar a#delete').addClass('btn-disabled');
+				$('#xdsoft_options,#xdsoft_options>div').hide();
+			}
+		}, 'json');
+	}
+	function validateGeometry(geometry) {
+		var coords = geometry, r;
+		if ($.type(geometry) === 'string') {
+			try {
+				coords = JSON.parse(geometry);
+			} catch (e) {
+				console.log(e.getMessage());
+				return false;
+			}
+		}
+		if ($.type(coords) === 'array') {
+			if (coords.length) {
+				for (r = 0; r < coords.length; r += 1) {
+					if ($.type(coords[r]) === 'array') {
+						if (!validateGeometry(coords[r])) {
+							return false;
+						}
+					} else {
+						if (isNaN(coords[r]) || coords[r] === null) {
+							return false;
+						}
+					}
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+	function updateObject(object) {
+		clearTimeout(timeoutupdate);
+		timeoutupdate = setTimeout(function () {
+			var object_type = object.properties.get('metaType') ? object.properties.get('metaType').toLowerCase() : 'polygon',
+				geometry = {},
+				_name,
+				keys = [],
+				r,
+				_key,
+				optes = {properties: {}, options: {}};
+
+			geometry = (object_type !== 'circle') ? object.geometry.getCoordinates() : [object.geometry.getCoordinates(), object.geometry.getRadius()];
+
+			if (
+				!geometry.length ||
+					!validateGeometry(geometry) ||
+					(
+						(
+							(object_type === 'polyline' && geometry.length === 1) ||
+							(object_type === 'polygon' && geometry.length === 1 && geometry[0].length < 3)
+						) &&
+						!window.selectOneObject.editor.state.get('drawing')
+					)
+			) {
+				deleteObject(object);
+				return;
+			}
+
+			keys = Object.keys(_opt);
+			for (r = 0; r < keys.length; r += 1) {
+				_name = keys[r];
+				for (_key = 0; _key < _opt[_name].length; _key = _key + 1) {
+					if (object[_name].get(_opt[_name][_key]) !== undefined) {
+						optes[_name][_opt[_name][_key]] = object[_name].get(_opt[_name][_key]);
+					}
+				}
+			}
+
+			$.post(window.baseurl + 'modules/mod_xdsoft_ymaps/ajax_input.php', {
+				action: 'saveobject',
+				type: object_type,
+				module_id: window.module_id,
+				id: parseInt(object.options.get('xdsoft_id'), 10),
+				coordinates: JSON.stringify(geometry),
+				options: JSON.stringify(optes.options),
+				properties: JSON.stringify(optes.properties)
+			}, function (resp) {
+				if (!resp.error) {
+					object.options.set('xdsoft_id', resp.id);
+					if (object.xditem) {
+						object.xditem.find('span').text(object_type + resp.id);
+						object.xditem.addClass('saved');
+					}
+				}
+			}, 'json');
+		}, 200);
+	}
+	function initForm(object_type, object, noshow) {
+		$('#xdsoft_options>div').hide();
+
+		if (!noshow) {
+			$('#xdsoft_options,#' + object_type + '_options').show();
+		} else {
+			$('#' + object_type + ' _options').show();
+		}
+		$('#' + object_type + '_options').find('textarea,input,select').each(function () {
+			var mode = $(this).hasClass('options') ? 'options' : 'properties',
+				val = object[mode].get(this.id);
+			this.value = this.getAttribute('type') === 'range' ? val * 10 : val;
+		});
+	}
 	ymaps.ready(function () {
 		var center	= $('#jform_params_center').val() ? $('#jform_params_center').val().split(',') : [55, 34],
 			zoom = parseInt($('#jform_params_zoom').val(), 10),
@@ -16,7 +129,8 @@
 			height = $('#jform_params_height').val(),
 			width = $('#jform_params_width').val(),
 			elm,
-			controls = ['zoomControl', 'typeSelector', /*'mapTools', 'miniMap',*/ 'searchControl', /*'smallZoomControl',*/ 'trafficControl', 'fullscreenControl', 'geolocationControl', 'routeEditor', 'rulerControl'],
+			group,
+			controls = ['zoomControl', 'typeSelector', 'searchControl', 'trafficControl', 'fullscreenControl', 'geolocationControl', 'routeEditor', 'rulerControl'],
 			behaviors = ['scrollZoom', 'drag', 'dblClickZoom', 'multiTouch', 'leftMouseButtonMagnifier', 'rightMouseButtonMagnifier', 'ruler', 'routeEditor'],
 			r;
 
@@ -34,11 +148,12 @@
 			.css('width', (width === 'auto') ? 440 + 'px' : width)
 			.css('height', height);
 
-		window.map = new ymaps.Map("work_area_map", {
+		window.map = new ymaps.Map('work_area_map', {
 			center: center,
 			zoom: zoom,
 			type: type,
 			flying: true,
+			controls: ['zoomControl'],
 			behaviors: ['scrollZoom', 'drag']
 		});
 
@@ -94,21 +209,35 @@
 
 		window.sizerBox = new SizerBox(window.map, ymaps);
 
-		function controlsChanger(event) {
-			var id = $(event.currentTarget).id.replace('jform_params_', '');
+		/**
+			Для карты в админке установлен ограниченный набор элементов управления. Сделано это для того, чтобы максимально расширить рабочее пространство
+		 */
+
+		/*function controlsChanger(event) {
+			var id = this.id.replace('jform_params_', '').replace(/[0-1]$/, '');
 			window.map.controls[event.currentTarget.checked ? 'add' : 'remove'](id);
+		}
+		function controlsBtnChanger(event) {
+			var id = this.id.replace('jform_params_', '').replace(/[0-1]$/, '');
+			window.map.controls[!$(this).hasClass('.btn-danger') ? 'add' : 'remove'](id);
 		}
 		for (r = 0; r < controls.length; r = r + 1) {
 			elm = document.getElementById('jform_params_' + controls[r].toLowerCase() + '1');
+			group = document.getElementById('jform_params_' + controls[r].toLowerCase());
 			if (elm) {
 				if (elm.checked) {
 					window.map.controls.add(controls[r]);
 				}
 
 				$(elm).on('change', controlsChanger);
+				$(group).on('click', controlsBtnChanger);
 			}
-		}
-
+		}*/
+		
+		/**
+		  Идентично поступаем с поведениями
+		 */
+		/*
 		function behaviorsChanger(event) {
 			var id = event.currentTarget.id.replace('jform_params_', '');
 			window.map.behaviors[event.currentTarget.checked ? 'enable' : 'disable'](id);
@@ -120,7 +249,7 @@
 				$(elm).on('change', behaviorsChanger);
 			}
 		}
-
+		*/
 		window.selectOneObject = false;
 		function pos(obj) {
 			return (function functionGetFirstCoord(crd) {
@@ -164,7 +293,7 @@
 				e.stopPropagation();
 				return false;
 			});
-			object.events.add('click', function (e) {
+			object.events.add('click', function () {
 				$('#xdsoft_options a#delete').removeClass('btn-disabled');
 				initForm(object_type, object, window.selectOneObject === object);
 				window.selectOneObject = object;
@@ -173,8 +302,8 @@
 
 			window.sizerBox.init(object);
 
-			object.xditem = div = $('<div><span>' + object_type + '</span><a>&times;</a></div>');
-
+			div = $('<div><span>' + object_type + '</span><a>&times;</a></div>');
+			object.xditem = div;
 			if (!id) {
 				initForm(object_type, object, true);
 				updateObject(object);
@@ -288,119 +417,6 @@
 
 	timeoutupdate = 0;
 	_opt = {options: ['strokeColor', 'strokeOpacity', 'strokeWidth', 'fillColor', 'fillOpacity', 'preset'], properties: ['metaType', 'iconContent', 'balloonContent']};
-	function deleteObject(object) {
-		$.post(window.baseurl + 'modules/mod_xdsoft_ymaps/ajax_input.php', {action: 'deleteobject', id: object.options.get('xdsoft_id'), module_id: window.module_id}, function (resp) {
-			if (!resp.error) {
-				window.map.geoObjects.remove(object);
-				window.sizerBox.hide();
-				if (object.xditem) {
-					object.xditem.remove();
-				}
-				object = null;
-				$('.toolbar a#delete').addClass('btn-disabled');
-				$('#xdsoft_options,#xdsoft_options>div').hide();
-			}
-		}, 'json');
-	}
-	function validateGeometry(geometry) {
-		var coords = geometry, r;
-		if ($.type(geometry) === 'string') {
-			try {
-				coords = JSON.parse(geometry);
-			} catch (e) {
-				return false;
-			}
-		}
-		if ($.type(coords) === 'array') {
-			if (coords.length) {
-				for (r in coords) {
-					if (coords.hasOwnProperty(r)) {
-						if ($.type(coords[r]) === 'array') {
-							if (!validateGeometry(coords[r])) {
-								return false;
-							}
-						} else {
-							if (isNaN(coords[r]) || coords[r] === null) {
-								return false;
-							}
-						}
-					}
-				}
-				return true;
-			}
-		}
-		return false;
-	}
-	function updateObject(object) {
-		clearTimeout(timeoutupdate);
-		timeoutupdate = setTimeout(function () {
-			var object_type = object.properties.get('metaType') ? object.properties.get('metaType').toLowerCase() : 'polygon',
-				id = object.options.get('xdsoft_id'),
-				geometry = {},
-				_name,
-				_key,
-				optes = {properties: {}, options: {}};
-
-			geometry = (object_type !== 'circle') ? object.geometry.getCoordinates() : [object.geometry.getCoordinates(), object.geometry.getRadius()];
-
-			if (
-				!geometry.length ||
-					!validateGeometry(geometry) ||
-					(
-						(
-							(object_type === 'polyline' && geometry.length === 1) ||
-							(object_type === 'polygon' && geometry.length === 1 && geometry[0].length < 3)
-						) &&
-						!window.selectOneObject.editor.state.get('drawing')
-					)
-			) {
-				deleteObject(object);
-				return;
-			}
-
-			for (_name in _opt) {
-				if (_opt.hasOwnProperty(_name)) {
-					for (_key = 0; _key < _opt[_name].length; _key = _key + 1) {
-						if (object[_name].get(_opt[_name][_key]) !== undefined) {
-							optes[_name][_opt[_name][_key]] = object[_name].get(_opt[_name][_key]);
-						}
-					}
-				}
-			}
-
-			$.post(window.baseurl + 'modules/mod_xdsoft_ymaps/ajax_input.php', {
-				action: 'saveobject',
-				type: object_type,
-				module_id: window.module_id,
-				id: parseInt(object.options.get('xdsoft_id'), 10),
-				coordinates: JSON.stringify(geometry),
-				options: JSON.stringify(optes.options),
-				properties: JSON.stringify(optes.properties)
-			}, function (resp) {
-				if (!resp.error) {
-					object.options.set('xdsoft_id', resp.id);
-					if (object.xditem) {
-						object.xditem.find('span').text(object_type + resp.id);
-						object.xditem.addClass('saved');
-					}
-				}
-			}, 'json');
-		}, 200);
-	}
-	function initForm(object_type, object, noshow) {
-		$('#xdsoft_options>div').hide();
-
-		if (!noshow) {
-			$('#xdsoft_options,#' + object_type + '_options').show();
-		} else {
-			$('#' + object_type + ' _options').show();
-		}
-		$('#' + object_type + '_options').find('textarea,input,select').each(function () {
-			var mode = $(this).hasClass('options') ? 'options' : 'properties',
-				val = object[mode].get(this.id);
-			this.value = this.getAttribute('type') === 'range' ? val * 10 : val;
-		});
-	}
 	$(function () {
 		window.module_id = parseInt($('#module_id').val(), 10);
 
@@ -416,7 +432,7 @@
 				}
 			});
 
-		var timeoutKeyup = 0, objects_finder;
+		var timeoutKeyup = 0;
 		$('#xdsoft_options').find('textarea,input,select').on('change blur keypress', function () {
 			var _this = this;
 			clearTimeout(timeoutKeyup);
@@ -496,15 +512,15 @@
 					$.getJSON("http://geocode-maps.yandex.ru/1.x/?callback=?&format=json&geocode=" + encodeURIComponent(q), function (data) {
 						var suggestions = [];
 						if (data.response) {
-							$.each(data.response.GeoObjectCollection.featureMember, function (i, val) {
-								suggestions.push(val.GeoObject.metaDataProperty.GeocoderMetaData.text);
+							$.each(data.response.GeoObjectCollection.featureMember, function (i) {
+								suggestions.push(data.response.GeoObjectCollection.featureMember[i].GeoObject.metaDataProperty.GeocoderMetaData.text);
 							});
 							add(suggestions);
 						}
 					});
 				}
 			]
-		}).on('selected.xdsoft', function (e, datum) {
+		}).on('selected.xdsoft', function () {
 			setMapCenter(this.value);
 		}).on('keydown.xdsoft', function (e) {
 			if (e.keyCode === 13) {
